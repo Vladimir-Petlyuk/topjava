@@ -23,7 +23,7 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
-        System.out.println(getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(21, 0), 2000));
+        System.out.println(getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
 //        .toLocalDate();
 //        .toLocalTime();
     }
@@ -34,14 +34,9 @@ public class UserMealsUtil {
         List<UserMealWithExceed> result = new ArrayList<>();
         Map<LocalDate, Integer> map = new HashMap<>();
         for (UserMeal user : mealList) {
+            map.merge(user.getDateTime().toLocalDate(),user.getCalories(),(v1,v2)->v1+v2);
             if (TimeUtil.isBetween(user.getDateTime().toLocalTime(), startTime, endTime))
                 list.add(user);
-        }
-        for (UserMeal user : list) {
-            if (map.containsKey(user.getDateTime().toLocalDate()))
-                map.put(user.getDateTime().toLocalDate(), map.get(user.getDateTime().toLocalDate()) + user.getCalories());
-            else
-                map.put(user.getDateTime().toLocalDate(), user.getCalories());
         }
         for(UserMeal user:list){
             result.add(new UserMealWithExceed(

@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.List;
-import java.util.WeakHashMap;
+
 
 public class MealServlet extends HttpServlet {
 
@@ -36,9 +36,9 @@ public class MealServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.debug("debug meals");
+        LOG.debug("doGet meals");
 
-        String forward = "";
+        String forward;
         String action = request.getParameter("action");
         if (action == null) {
             forward = LIST_MEALS;
@@ -75,6 +75,7 @@ public class MealServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOG.debug("doPost meals");
         request.setCharacterEncoding("cp1251");
 
         LocalDateTime date = LocalDateTime.parse(request.getParameter("doc"));
@@ -90,6 +91,7 @@ public class MealServlet extends HttpServlet {
 
         listMeals=initList(2000);
         RequestDispatcher view = request.getRequestDispatcher(LIST_MEALS);
+        request.setAttribute("formatter", formatter);
         request.setAttribute("listMeals", listMeals);
         view.forward(request, response);
     }

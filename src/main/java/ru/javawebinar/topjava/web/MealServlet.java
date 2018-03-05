@@ -2,13 +2,11 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.javawebinar.topjava.SimpleDB;
 import ru.javawebinar.topjava.dao.CrudForMap;
 import ru.javawebinar.topjava.daoimpl.ImplCDUDFromJava;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
 import ru.javawebinar.topjava.util.MealsUtil;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -49,9 +46,10 @@ public class MealServlet extends HttpServlet {
             if (action.equalsIgnoreCase("delete")) {
                 int mealId = Integer.parseInt(request.getParameter("mealId"));
                 crud.delete(mealId);
-                forward = LIST_MEALS;
+                forward ="/topjava/meals";
                 listMeals=initList(2000);
-                request.setAttribute("listMeals", listMeals);
+                response.sendRedirect(response.encodeRedirectURL(forward));
+                return;
 
             } else if (action.equalsIgnoreCase("edit")) {
                 forward = INSERT_OR_EDIT;

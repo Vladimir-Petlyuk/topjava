@@ -19,10 +19,10 @@
 
 <form method="POST" action='meals' name="editMeal">
 
-    User ID : <input type="text" readonly="readonly" name="mealId" value="<c:out value="${meal.id}" />"/> <br/>
-    Description : <input type="text" name="description" value="<c:out value="${meal.description}" />"/> <br/>
-    Calories : <input type="text" name="calories" value="<c:out value="${meal.calories}" />"/> <br/>
-    DOC : <input type="datetime-local" name="doc" value="${meal.dateTime}"/> <br/>
+    User ID : <input type="text" readonly="readonly" name="mealId" value="<c:out value="${meal.id}"/>" required/> <br/>
+    Description : <input type="text" name="description" value="<c:out value="${meal.description}" />"required/> <br/>
+    Calories : <input type="text" name="calories" value="<c:out value="${meal.calories}" />" required/> <br/>
+    DOC : <input type="datetime-local" name="doc" value="${meal.dateTime}" required/> <br/>
     <button type="submit">Submit</button>
 </form>
 

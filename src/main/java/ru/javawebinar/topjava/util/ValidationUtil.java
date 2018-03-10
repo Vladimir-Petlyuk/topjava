@@ -19,11 +19,13 @@ public class ValidationUtil {
         return object;
     }
 
+
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
         }
     }
+
 
     public static void checkNew(AbstractBaseEntity entity) {
         if (!entity.isNew()) {

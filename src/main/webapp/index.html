@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Java Enterprise (Topjava)</title>
+    <link rel='stylesheet' href='/style.css'>
 </head>
 <body>
 <h3>Проект <a href="https://github.com/JavaWebinar/topjava" target="_blank">Java Enterprise (Topjava)</a></h3>
@@ -10,5 +11,14 @@
     <li><a href="users">Users</a></li>
     <li><a href="meals">Meals</a></li>
 </ul>
+<form method="post" action="users">
+
+    <dl>
+        <dd><input type="text" name="userId"></dd>
+    </dl>
+
+    <button type="submit">Set</button>
+    <button onclick="window.history.back()" type="button">Cancel</button>
+</form>
 </body>
 </html>

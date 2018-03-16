@@ -118,7 +118,7 @@ public class MealServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("meals",
-                        user.getRoles().contains(Role.ROLE_ADMIN) ? mealRestController.getAll() : mealRestController.getAllByid(user.getId()));
+                        user.getRoles().contains(Role.ROLE_ADMIN) ? mealRestController.getAll() : mealRestController.getAllById(user.getId()));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }

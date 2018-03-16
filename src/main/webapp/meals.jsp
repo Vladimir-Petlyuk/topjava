@@ -22,7 +22,7 @@
     <h2>Meals</h2>
     <hr/>
     <section>
-        <h5>Filter</h5>
+        <h4>Filter</h4>
         <form method="post" action="meals?action=sorted" >
             <table>
                 <tr>

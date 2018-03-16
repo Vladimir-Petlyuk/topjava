@@ -21,6 +21,7 @@ public class MealRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final MealService service;
+    private final int CALORIES = MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
     @Autowired
     public MealRestController(MealService service) {
@@ -29,27 +30,27 @@ public class MealRestController {
 
     public List<MealWithExceed> getAll() {
         log.info("getAll");
-        return MealsUtil.getWithExceeded(service.getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+        return MealsUtil.getWithExceeded(service.getAll(), CALORIES);
     }
 
-    public List<MealWithExceed> getAllByid(int id) {
-        log.info("getAll");
-        return MealsUtil.getWithExceeded(service.getAllByUserId(id), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+    public List<MealWithExceed> getAllById(int id) {
+        log.info("getAllById");
+        return MealsUtil.getWithExceeded(service.getAllByUserId(id), CALORIES);
     }
 
     public List<MealWithExceed> sortedByTime(LocalTime first, LocalTime end, int id) {
         log.info("sortedByTime");
-        return MealsUtil.getFilteredWithExceededByTime(service.getAllByUserId(id), MealsUtil.DEFAULT_CALORIES_PER_DAY,first,end);
+        return MealsUtil.getFilteredWithExceededByTime(service.getAllByUserId(id), CALORIES,first,end);
     }
 
     public List<MealWithExceed> sortedByDate(LocalDate first, LocalDate end, int id) {
         log.info("sortedByDate");
-        return MealsUtil.getFilteredWithExceededByDate(service.getAllByUserId(id), MealsUtil.DEFAULT_CALORIES_PER_DAY,first,end);
+        return MealsUtil.getFilteredWithExceededByDate(service.getAllByUserId(id), CALORIES,first,end);
     }
 
     public List<MealWithExceed> sortedByDateTime(LocalDateTime first, LocalDateTime end, int id) {
-        log.info("sortedByDate");
-        return MealsUtil.getFilteredWithExceededByDateTime(service.getAllByUserId(id), MealsUtil.DEFAULT_CALORIES_PER_DAY,first,end);
+        log.info("sortedByDateTime");
+        return MealsUtil.getFilteredWithExceededByDateTime(service.getAllByUserId(id), CALORIES,first,end);
     }
 
     public Meal create(Meal meal) {

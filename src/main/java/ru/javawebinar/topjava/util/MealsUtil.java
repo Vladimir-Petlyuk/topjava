@@ -36,8 +36,8 @@ public class MealsUtil {
     public static List<MealWithExceed> getFilteredWithExceededByTime(Collection<Meal> meals, int caloriesPerDay, LocalTime startTime, LocalTime endTime) {
         return getFilteredWithExceeded(meals, caloriesPerDay, meal -> DateTimeUtil.isBetweenTime(meal.getTime(), startTime, endTime));
     }
-    public static List<MealWithExceed> getFilteredWithExceededByDate(Collection<Meal> meals, int caloriesPerDay, LocalDate startTime, LocalDate endTime) {
-        return getFilteredWithExceeded(meals, caloriesPerDay, meal -> DateTimeUtil.isBetweenDate(meal.getDate(), startTime, endTime));
+    public static List<MealWithExceed> getFilteredWithExceededByDate(Collection<Meal> meals, int caloriesPerDay, LocalDate startDate, LocalDate endDate) {
+        return getFilteredWithExceeded(meals, caloriesPerDay, meal -> DateTimeUtil.isBetweenDate(meal.getDate(), startDate, endDate));
     }
     public static List<MealWithExceed> getFilteredWithExceededByDateTime(Collection<Meal> meals, int caloriesPerDay, LocalDateTime start, LocalDateTime end) {
         return getFilteredWithExceeded(meals, caloriesPerDay, meal -> DateTimeUtil.isBetweenDateTime(meal.getDateTime(), start, end));
@@ -49,7 +49,6 @@ public class MealsUtil {
                 .collect(
                         Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
                 );
-
         return meals.stream()
                 .filter(filter)
                 .map(meal -> createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))

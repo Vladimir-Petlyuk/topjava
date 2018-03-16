@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
+
+import java.util.Collections;
 import java.util.List;
 
 
@@ -48,11 +50,13 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public List<Meal> getAll() {
-        return repository.getAll();
+        List<Meal> list= repository.getAll();
+        return list==null ? Collections.EMPTY_LIST:list;
     }
 
     @Override
     public List<Meal> getAllByUserId(int id) {
-        return repository.getAllByUserId(id);
+        List<Meal> list= repository.getAllByUserId(id);
+        return list==null ? Collections.EMPTY_LIST:list;
     }
 }

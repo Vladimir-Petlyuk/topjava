@@ -17,5 +17,5 @@ public interface MealService {
 
     List<Meal> getAll();
 
-     List<Meal> getAllByUserId(int id);
+    List<Meal> getAllByUserId(int id);
 }

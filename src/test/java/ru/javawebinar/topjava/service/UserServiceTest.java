@@ -1,6 +1,9 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
+import ru.javawebinar.topjava.MyRule;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -32,6 +36,15 @@ public class UserServiceTest {
         // It uses java.util.logging and logged via jul-to-slf4j bridge
         SLF4JBridgeHandler.install();
     }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Rule
+    public MyRule myRule = new MyRule(name);
+
 
     @Autowired
     private UserService service;
@@ -44,8 +57,9 @@ public class UserServiceTest {
         assertMatch(service.getAll(), ADMIN, newUser, USER);
     }
 
-    @Test(expected = DataAccessException.class)
+    @Test
     public void duplicateMailCreate() throws Exception {
+        thrown.expect(DataAccessException.class);
         service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
@@ -55,8 +69,9 @@ public class UserServiceTest {
         assertMatch(service.getAll(), ADMIN);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void notFoundDelete() throws Exception {
+        thrown.expect(NotFoundException.class);
         service.delete(1);
     }
 
@@ -66,8 +81,9 @@ public class UserServiceTest {
         assertMatch(user, USER);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void getNotFound() throws Exception {
+        thrown.expect(NotFoundException.class);
         service.get(1);
     }
 

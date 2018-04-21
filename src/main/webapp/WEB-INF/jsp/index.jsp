@@ -15,8 +15,8 @@
         <button type="submit"><spring:message code="common.select"/></button>
 </form>
 <ul>
-    <li><a href="users"><spring:message code="user.title"/></a></li>
-    <li><a href="meals"><spring:message code="meal.title"/></a></li>
+    <li><a href="${pageContext.request.contextPath}/users"><spring:message code="user.title"/></a></li>
+    <li><a href="${pageContext.request.contextPath}/meals/"><spring:message code="meal.title"/></a></li>
 </ul>
 </section>
 <jsp:include page="fragments/footer.jsp"/>

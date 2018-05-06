@@ -10,7 +10,7 @@
 <script type="text/javascript" src="resources/js/userDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
-<div class="jumbotron">
+<div class="jumbotron pt-4">
     <div class="container">
         <h3><spring:message code="user.title"/></h3>
         <br/>
@@ -30,19 +30,6 @@
                 <th></th>
             </tr>
             </thead>
-            <c:forEach items="${users}" var="user">
-                <jsp:useBean id="user" type="ru.javawebinar.topjava.model.User"/>
-                <tr>
-                    <td><c:out value="${user.name}"/></td>
-                    <td><a href="mailto:${user.email}">${user.email}</a></td>
-                    <td>${user.roles}</td>
-                    <td><input type="checkbox"
-                               <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/></td>
-                    <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                    <td><a><span class="fa fa-pencil"></span></a></td>
-                    <td><a class="delete" id="${user.id}"><span class="fa fa-remove"></span></a></td>
-                </tr>
-            </c:forEach>
         </table>
     </div>
 </div>
@@ -51,7 +38,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><spring:message code="user.add"/></h4>
+                <h4 class="modal-title" id="modalTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -79,11 +66,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <span class="fa fa-close" aria-hidden="true"></span>
+                    <span class="fa fa-close"></span>
                     <spring:message code="common.cancel"/>
                 </button>
                 <button type="button" class="btn btn-primary" onclick="save()">
-                    <span class="fa fa-check" aria-hidden="true"></span>
+                    <span class="fa fa-check"></span>
                     <spring:message code="common.save"/>
                 </button>
             </div>
@@ -92,4 +79,13 @@
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
+<script type="text/javascript">
+    var i18n = [];
+    i18n["addTitle"] = '<spring:message code="user.add"/>';
+    i18n["editTitle"] = '<spring:message code="user.edit"/>';
+
+    <c:forEach var="key" items='<%=new String[]{"common.deleted","common.saved","common.enabled","common.disabled","common.errorStatus"}%>'>
+    i18n["${key}"] = "<spring:message code="${key}"/>";
+    </c:forEach>
+</script>
 </html>
